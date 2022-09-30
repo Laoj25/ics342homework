@@ -8,4 +8,13 @@
     <string name="humidity">Humidity: 100%</string>
     <string name="pressure">Pressure: 1023 hPa</string>
     <string name="Weather_App">Weather App</string>
+    <string name="forecast">Forecast</string>
+    <string name="back">back</string>
+    <string name="degreeTemp">%d°</string>
+    <string name="label_sunrise">Sunrise:</string>
+    <string name="label_sunset">Sunset:</string>
+    <string name="label_high">High:</string>
+    <string name="label_low">Low:</string>
+    <string name="label_humidity">Humidity:</string>
+    <string name="label_pressure">Pressure:</string>
 </resources>
