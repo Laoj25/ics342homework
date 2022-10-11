@@ -4,7 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/laoje/AndroidStudioProjects/MyApplication/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Users/laoje/AndroidStudioProjects/WeatherApp/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/laoje/AndroidStudioProjects/WeatherApp/app/src/main/res/layout/activity_main.xml" value="0.256140350877193" />
+        <entry key="..\:/Users/laoje/AndroidStudioProjects/WeatherApp/app/src/main/res/layout/fragment_current_conditions.xml" value="0.264" />
+        <entry key="..\:/Users/laoje/AndroidStudioProjects/WeatherApp/app/src/main/res/layout/fragment_forecast.xml" value="0.16" />
+        <entry key="..\:/Users/laoje/AndroidStudioProjects/WeatherApp/app/src/main/res/layout/view_forecast_item.xml" value="0.1" />
       </map>
     </option>
   </component>
