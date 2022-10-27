@@ -1,15 +1,26 @@
 package com.example.myapplication
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.google.android.material.tabs.TabLayout
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.ui.res.stringResource
+import com.example.myapplication.ui.CurrentConditionsScreen
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(TAB, "onCreate() called")
-        setContentView(R.layout.activity_main)
+
+        setContent {
+            CurrentConditionsScreen(
+                cityName = stringResource(id = R.string.city_name),
+                temperature = stringResource(id = R.string.current_temp, 56)
+            )
+
+        }
+
     }
 
     companion object {
