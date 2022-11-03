@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">My Application</string>
     <string name="city_name">St. Paul, MN</string>
-    <string name="current_temp">80°</string>
+    <string name="current_temp">%d°</string>
     <string name="low_temp">Low: 75°</string>
     <string name="Feels_like">Feels like 85°</string>
     <string name="high_temp">High: 90°</string>

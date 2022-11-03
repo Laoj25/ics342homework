@@ -1,15 +1,10 @@
 package com.example.myapplication
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.example.myapplication.databinding.FragmentForecastBinding
-import java.time.LocalDateTime
-import java.time.ZoneOffset
-import java.time.format.DateTimeFormatter
 
 val forecastData = listOf<DayForecast>(
     DayForecast(1664354541L,1664354541L,1664416521L, ForecastTemp(34, 45),30.7f,88),
