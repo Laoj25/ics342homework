@@ -1,13 +1,16 @@
 package com.example.myapplication.ui
 
-import androidx.compose.foundation.Image
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -16,13 +19,41 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import coil.compose.AsyncImage
 import com.example.myapplication.R
+import com.example.myapplication.models.CurrentCondition
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
+@Composable
+fun CurrentConditions(
+    viewModel: CurrentConditionsViewModel = hiltViewModel(),
+    onForecastButtonClick: () -> Unit,
+){
+    
+    val state by viewModel.currentConditions.collectAsState(null)
+    
+    LaunchedEffect(Unit){
+        viewModel.fetchData()
+    }
+    Scaffold(topBar = { AppBar(title = R.string.app_name.toString()) }){
+
+        state?.let {
+            CurrentConditionsScreen(it){
+                onForecastButtonClick()
+            }
+        }
+    }
+}
+
+fun stringResource(id: String): String {
+    return id
+}
 
 @Composable
-fun CurrentConditionsScreen(
-    cityName: String,
-    temperature: String,
+private fun CurrentConditionsScreen(
+    currentCondition: CurrentCondition,
+    onForecastButtonClick: () -> Unit,
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
@@ -30,7 +61,7 @@ fun CurrentConditionsScreen(
         Text(
             modifier = Modifier
                 .padding(top = 16.dp),
-            text = cityName,
+            text = stringResource(id = R.string.city_name),
             style = TextStyle(
                 fontSize = 18.sp,
                 fontWeight = FontWeight(400),
@@ -46,7 +77,7 @@ fun CurrentConditionsScreen(
         {
 
             Text(
-                text = temperature,
+                text = stringResource(id = R.string.current_temp, currentCondition.conditions.temperature.toInt()),
                 style = TextStyle(
                     fontSize = 72.sp,
                     fontWeight = FontWeight(600),
@@ -57,10 +88,11 @@ fun CurrentConditionsScreen(
             
 
             Spacer(modifier = Modifier.weight(1.0f, true))
-            Image(
+            val iconUrl = String.format("https://openweathermap.org/img/wn/%s@2x.png", currentCondition.weatherData.firstOrNull()?.iconName)
+            AsyncImage(
+                model = iconUrl,
                 modifier = Modifier
                     .size(72.dp),
-                painter = painterResource(id = R.drawable.sun_icon),
                 contentDescription = "Sunny",
             )
         }
@@ -72,30 +104,19 @@ fun CurrentConditionsScreen(
             horizontalAlignment = Alignment.Start
         ) {
 
-            Text(text = stringResource(id = R.string.Feels_like),
+            Text(text = stringResource(id = R.string.Feels_like, currentCondition.conditions.feelsLike.toInt()),
                 Modifier.padding(horizontal = 35.dp))
 
-            Text(
-                text = stringResource(id = R.string.low_temp),
+            Text(text = stringResource(id = R.string.low_temp, currentCondition.conditions.minTemperature.toInt()),)
 
-            )
+            Text(text = stringResource(id = R.string.high_temp, currentCondition.conditions.maxTemperature.toInt()),)
 
-            Text(
-                text = stringResource(id = R.string.high_temp),
+            Text(text = stringResource(id = R.string.humidity, currentCondition.conditions.humidity.toInt()),)
 
-            )
-
-            Text(
-                text = stringResource(id = R.string.humidity),
-
-            )
-
-            Text(
-                text = stringResource(id = R.string.pressure),
-            )
+            Text(text = stringResource(id = R.string.pressure, currentCondition.conditions.pressure.toInt()),)
         }
         Spacer(modifier = Modifier.height(72.dp))
-        Button(onClick = {}) {
+        Button(onClick = onForecastButtonClick) {
             Text(text = stringResource(id = R.string.forecast))
         }
 
@@ -111,8 +132,5 @@ fun CurrentConditionsScreen(
 
 @Composable
 fun CurrentConditionsScreenPreview (){
-    CurrentConditionsScreen(
-        cityName = "Minneapolis, MN",
-        temperature = "89",
-    )
+    CurrentConditions{}
 }

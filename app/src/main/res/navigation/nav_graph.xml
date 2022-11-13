@@ -4,6 +4,8 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/currentConditionsFragment">
 
+
+
     <fragment
         android:id="@+id/currentConditionsFragment"
         android:name="com.example.myapplication.CurrentConditionsFragment"
