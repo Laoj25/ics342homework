@@ -1,12 +1,12 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">WeatherApp</string>
     <string name="city_name">St. Paul, MN</string>
     <string name="current_temp">%d°</string>
-    <string name="low_temp">Low: 75°</string>
-    <string name="Feels_like">Feels like 85°</string>
-    <string name="high_temp">High: 90°</string>
-    <string name="humidity">Humidity: 100%</string>
-    <string name="pressure">Pressure: 1023 hPa</string>
+    <string name="low_temp">Low: %d°</string>
+    <string name="Feels_like">Feels like %d°</string>
+    <string name="high_temp">High: %d°</string>
+    <string name="humidity">Humidity: %d%%</string>
+    <string name="pressure">Pressure: %dhPa</string>
     <string name="Weather_App">Weather App</string>
     <string name="forecast">Forecast</string>
     <string name="back">back</string>

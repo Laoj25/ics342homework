@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.databinding.FragmentCurrentConditionsBinding
 
+
 class CurrentConditionsFragment : Fragment(R.layout.fragment_current_conditions) {
 
     private lateinit var binding: FragmentCurrentConditionsBinding
