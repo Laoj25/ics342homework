@@ -22,38 +22,47 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.example.myapplication.R
+import com.example.myapplication.R.string
 import com.example.myapplication.models.CurrentCondition
+import com.example.myapplication.models.LatitudeLongitude
+
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun CurrentConditions(
+    latitudeLongitude: LatitudeLongitude?,
     viewModel: CurrentConditionsViewModel = hiltViewModel(),
+    onGetWeatherForMyLocationClick: () -> Unit,
     onForecastButtonClick: () -> Unit,
 ){
     
     val state by viewModel.currentConditions.collectAsState(null)
-    
-    LaunchedEffect(Unit){
-        viewModel.fetchData()
-    }
-    Scaffold(topBar = { AppBar(title = R.string.app_name.toString()) }){
 
-        state?.let {
-            CurrentConditionsScreen(it){
-                onForecastButtonClick()
-            }
+    if (latitudeLongitude != null){
+        LaunchedEffect(Unit) {
+            viewModel.fetchCurrentLocationData(latitudeLongitude)
+        }
+    } else {
+        LaunchedEffect(Unit) {
+            viewModel.fetchData()
         }
     }
-}
 
-fun stringResource(id: String): String {
-    return id
+    Scaffold(
+        topBar = { AppBar(title = stringResource(id = string.app_name )) },
+    ){
+        state?.let {
+            CurrentConditionsScreen(it, onGetWeatherForMyLocationClick, onForecastButtonClick)
+        }
+    }
 }
 
 @Composable
 private fun CurrentConditionsScreen(
     currentCondition: CurrentCondition,
+    onGetWeatherForMyLocationClick: () -> Unit,
     onForecastButtonClick: () -> Unit,
+
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
@@ -61,7 +70,7 @@ private fun CurrentConditionsScreen(
         Text(
             modifier = Modifier
                 .padding(top = 16.dp),
-            text = stringResource(id = R.string.city_name),
+            text = currentCondition.cityName,
             style = TextStyle(
                 fontSize = 18.sp,
                 fontWeight = FontWeight(400),
@@ -104,33 +113,26 @@ private fun CurrentConditionsScreen(
             horizontalAlignment = Alignment.Start
         ) {
 
-            Text(text = stringResource(id = R.string.Feels_like, currentCondition.conditions.feelsLike.toInt()),
-                Modifier.padding(horizontal = 35.dp))
-
+            Text(text = stringResource(id = R.string.Feels_like, currentCondition.conditions.feelsLike.toInt()), Modifier.padding(horizontal = 35.dp))
             Text(text = stringResource(id = R.string.low_temp, currentCondition.conditions.minTemperature.toInt()),)
-
             Text(text = stringResource(id = R.string.high_temp, currentCondition.conditions.maxTemperature.toInt()),)
-
             Text(text = stringResource(id = R.string.humidity, currentCondition.conditions.humidity.toInt()),)
-
             Text(text = stringResource(id = R.string.pressure, currentCondition.conditions.pressure.toInt()),)
         }
         Spacer(modifier = Modifier.height(72.dp))
         Button(onClick = onForecastButtonClick) {
             Text(text = stringResource(id = R.string.forecast))
         }
-
+        Spacer(modifier = Modifier.height(24.dp))
+        Button(onClick = onGetWeatherForMyLocationClick) {
+            Text(text = stringResource(id = string.get_weather_for_my_location))
+        }
     }
 }
 @Preview(
-    "CurrentConditions",
-    device = Devices.PIXEL_4,
-    showBackground = true,
     showSystemUi = true,
 )
-
-
 @Composable
 fun CurrentConditionsScreenPreview (){
-    CurrentConditions{}
+
 }
