@@ -11,10 +11,12 @@
     <string name="forecast">Forecast</string>
     <string name="back">back</string>
     <string name="degreeTemp">%d°</string>
-    <string name="label_sunrise">Sunrise:</string>
-    <string name="label_sunset">Sunset:</string>
+    <string name="label_sunrise">Sunrise: %s</string>
+    <string name="label_sunset">Sunset: %s</string>
     <string name="label_high">High:</string>
     <string name="label_low">Low:</string>
-    <string name="label_humidity">Humidity:</string>
-    <string name="label_pressure">Pressure:</string>
+    <string name="label_humidity">Humidity: %d</string>
+    <string name="label_pressure">Pressure: %d</string>
+    <string name="temp_label">Temp: %d</string>
+    <string name="get_weather_for_my_location"> Get Weather for My Location</string>
 </resources>

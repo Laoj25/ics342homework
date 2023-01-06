@@ -17,7 +17,7 @@ data class ForecastConditionsData(
 
 )
 
-data class ForecastTemp(
+data class HighLowForecastTemp(
     @Json(name = "minTemp")val minTemp: Float,
     @Json(name = "maxTemp")val maxTemp: Float,
 )
@@ -25,5 +25,7 @@ data class ForecastTemp(
 data class ForecastConditions(
     @Json(name = "weather") val weatherData: List<Weather>,
     @Json(name = "main") val forecast: ForecastConditionsData,
+    @Json(name = "temp") val hiLowTemp: HighLowForecastTemp,
+    @Json(name = "forecastList") val forecastList: List<ForecastConditionsData>,
 )
 
